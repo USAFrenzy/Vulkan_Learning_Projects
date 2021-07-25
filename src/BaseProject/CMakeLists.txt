@@ -3,11 +3,12 @@ set(PROJECT_NAME Base_Project)
 message(CHECK_START "Building The Initial Base Project")
 
 set(HEADER_FILES
-
+"Base/base.h"
 )
 
 set(IMPLEMENTATION_FILES
 "main.cpp"
+"Base/base.cpp"
 )
 
 source_group("BaseProject\\Header Files" FILES ${HEADER_FILES})
