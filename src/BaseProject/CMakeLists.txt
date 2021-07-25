@@ -7,7 +7,7 @@ set(HEADER_FILES
 )
 
 set(IMPLEMENTATION_FILES
-"testingsetup.cpp"
+"main.cpp"
 )
 
 source_group("BaseProject\\Header Files" FILES ${HEADER_FILES})
