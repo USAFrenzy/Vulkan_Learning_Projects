@@ -4,11 +4,13 @@ message(CHECK_START "Building The Initial Base Project")
 
 set(HEADER_FILES
 "Base/base.h"
+"Window/window.h"
 )
 
 set(IMPLEMENTATION_FILES
 "main.cpp"
 "Base/base.cpp"
+"Window/window.cpp"
 )
 
 source_group("BaseProject\\Header Files" FILES ${HEADER_FILES})

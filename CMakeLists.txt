@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 include_directories(vendor/include)
+include_directories(src)
 
 # cmakeSettings is the root folder for where other .cmake files will live
 

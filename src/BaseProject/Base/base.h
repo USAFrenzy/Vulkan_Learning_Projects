@@ -1,3 +1,5 @@
+#ifndef BASE_H
+#define BASE_H
 
 
 class BaseApplication
@@ -13,3 +15,7 @@ private:
     void vulkanFree();
 
 };
+
+
+
+#endif // !BASE.H
