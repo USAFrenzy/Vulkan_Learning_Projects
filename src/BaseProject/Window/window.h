@@ -14,24 +14,21 @@
 #endif
 
 #include <GLFW/glfw3.h>
-
+#include <string>
 
 class Window
 {
-
-	Window(int height, int width);
-	
+    public:
+	Window(int height, int width, std::string title);
 	~Window( );
-
-
-
+	void createWindow();
 
 	private:
 	GLFWwindow *window;
 	const int windowHeight;
 	const int windowWidth;
-
+	std::string windowTitle;
 };
 
 
-#endif // !WINDOW>H
+#endif // !WINDOW_H

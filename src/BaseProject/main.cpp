@@ -1,13 +1,21 @@
+#include "Base/base.h"
+#include "Window/window.h"
+
 #include <iostream>
 #include <stdexcept>
 
-
-#include "Base/base.h"
 
 int main()
 {
     std::cout << "Testing Initial Setup\n\n";
 
+    /****************************************************************
+                       Testing Basic GLFW Setup
+    ****************************************************************/
+    Window testWindow(800, 600, "TestWindow");        
+    
+
+    /***************************************************************/
     BaseApplication app;
     
     try
