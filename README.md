@@ -33,4 +33,4 @@ The Code Base Or See What Has So Far Been Created/Implemented, Then Read On Belo
 
 ## Current Progress ##
 
-![](https://github.com/USAFrenzy/Vulkan_Learning_Projects/Resources/Vulkan_Project_Progress_01.gif)
+![](https://github.com/USAFrenzy/Vulkan_Learning_Projects/blob/main/Resources/Vulkan_Project_Progress_01.gif)
