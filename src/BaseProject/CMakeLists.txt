@@ -21,7 +21,11 @@ ${HEADER_FILES}
 ${IMPLEMENTATION_FILES}
 )
 
+
 add_executable(${PROJECT_NAME} ${ALL_FILES})
+add_definitions()
+
+target_link_libraries(${PROJECT_NAME} glfw ${GLFW_LIBRARIES})
 
 ##################################################
 #     Target name For Configuration Builds       #

@@ -1,7 +1,16 @@
 cmake_minimum_required(VERSION 3.20)
 
-include_directories(vendor/include)
+# Include Directories for projects to be aware of #
+include_directories(vendor/Vulkan/include)
 include_directories(src)
+
+################################################
+# This Section Is For Linking To GLFW Later On #
+################################################
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)     # Change Option To Build The Docs
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)    # Change Option To Build The Tests
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # Change Option To Build The Examples
+add_subdirectory(vendor/GLFW)
 
 # cmakeSettings is the root folder for where other .cmake files will live
 
