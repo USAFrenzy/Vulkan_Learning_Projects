@@ -26,7 +26,6 @@ include(cmakeSettings/MetaData.cmake)
 ###################################################################################
 #                        Project Options                                          #
 ###################################################################################
-option(BUILD_SHARED_LIBS    "Enable Compilation Of Shared Libraries."        OFF)
 option(ENABLE_TESTING       "Enable Test Builds"                             OFF)
 
 ##############################
@@ -73,7 +72,7 @@ endif()
 ###################################
 # The Different Projects To Build #
 ###################################
-add_subdirectory(src/BaseProject/)
+add_subdirectory(src)
 
 set_property(
    DIRECTORY
