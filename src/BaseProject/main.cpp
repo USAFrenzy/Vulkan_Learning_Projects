@@ -8,14 +8,8 @@
 int main()
 {
     std::cout << "Testing Initial Setup\n\n";
-
-    /****************************************************************
-                       Testing Basic GLFW Setup
-    ****************************************************************/
-    Window testWindow(800, 600, "TestWindow");        
-    
-
-    /***************************************************************/
+        
+  
     BaseApplication app;
     
     try
@@ -28,5 +22,5 @@ int main()
     }
     
 
-    std::getchar(); // Only Here To Pause Before Auto Closing
+   
 }

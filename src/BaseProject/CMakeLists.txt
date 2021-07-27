@@ -2,6 +2,8 @@ set(PROJECT_NAME Base_Project)
 
 message(CHECK_START "Building The Initial Base Project")
 
+include_directories(${CMAKE_SOURCE_DIR}/src/BaseProject)
+
 set(HEADER_FILES
 "Base/base.h"
 "Window/window.h"
@@ -23,7 +25,6 @@ ${IMPLEMENTATION_FILES}
 
 
 add_executable(${PROJECT_NAME} ${ALL_FILES})
-add_definitions()
 
 target_link_libraries(${PROJECT_NAME} glfw ${GLFW_LIBRARIES})
 

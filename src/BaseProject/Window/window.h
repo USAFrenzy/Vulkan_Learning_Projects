@@ -20,15 +20,24 @@
 class Window
 {
     public:
-	Window(int height, int width, std::string title);
-	~Window( );
-	void createWindow();
+		Window(int height, int width, std::string title);
+		~Window( );
+
+		// Temporary Functions Until Event Handler Implemented
+		bool Close( );
+		static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+		static void window_pos_callback(GLFWwindow* window, int x, int y);
+		void PollEvents( );
 
 	private:
-	GLFWwindow *window;
-	const int windowHeight;
-	const int windowWidth;
-	std::string windowTitle;
+		void createWindow( );
+		
+
+	private:
+		GLFWwindow *window;
+		const int windowHeight;
+		const int windowWidth;
+		std::string windowTitle;
 };
 
 

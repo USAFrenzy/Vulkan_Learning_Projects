@@ -17,6 +17,12 @@
         vulkanInit();
         applicationLoop();
         vulkanFree();
+        // NOTE: Temporary Code To Allow Window Closing Until Custom Event Handler Is Implemented
+	    std::cout << "Polling Window Events\n";
+        while(!windowContext.Close()) 
+        {
+		    glfwPollEvents( );
+        }
     }  
 
     void BaseApplication::applicationLoop() 
