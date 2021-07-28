@@ -13,13 +13,13 @@ class BaseApplication
 		BaseApplication( );
 		~BaseApplication( );
 		void Run( );
-
+		void createInstance( );
       private:
 		Window windowContext {windowWidth, windowLength, windowTitle};
 		void applicationLoop( );
 		void vulkanInit( );
 		void vulkanFree( );
-
+		VkInstance instance;
      
 };
 

@@ -12,6 +12,23 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)    # Change Option To Build The Te
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # Change Option To Build The Examples
 add_subdirectory(vendor/GLFW)
 
+################################################
+#    This Section Is For Linking To Vulkan     #
+################################################
+find_package(Vulkan)
+    if (NOT ${Vulkan_INCLUDE_DIRS} STREQUAL "")
+        set(VULKAN_PATH ${Vulkan_INCLUDE_DIRS})
+        STRING(REGEX REPLACE "/Include" "" VULKAN_PATH ${Vulkan_INCLUDE_DIRS})
+    endif()
+    if(EXISTS "${VULKAN_PATH}")
+        message(STATUS "Successfully Found The Vulkan SDK. SDK Located At: ${VULKAN_PATH}")
+    else()
+        message(STATUS "Unable To Locate The Vulkan SDK")
+    endif()
+    ### Where To Look For The Vulkan Binaries And Libraries ####
+    link_directories(${VULKAN_PATH}/Bin;${VULKAN_PATH}/Lib;)
+#################### NEED TO VERIFY THIS WORKS, CURRENTLY UNABLE TO TEST AT THE MOMENT #########################
+
 # cmakeSettings is the root folder for where other .cmake files will live
 
 include(cmakeSettings/PreventInSrcBuilds.cmake) 
