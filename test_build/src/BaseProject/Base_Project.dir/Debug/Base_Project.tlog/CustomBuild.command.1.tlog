@@ -1,0 +1,10 @@
+^E:\DEV\LEARNING PROJECTS\VULKAN_LEARNING_PROJECTS\SRC\BASEPROJECT\CMAKELISTS.TXT
+setlocal
+"E:\Programming Tools\CMake\bin\cmake.exe" "-SE:/Dev/Learning Projects/Vulkan_Learning_Projects" "-BE:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build" --check-stamp-file "E:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build/src/BaseProject/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

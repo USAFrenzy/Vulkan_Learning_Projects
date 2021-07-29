@@ -1,8 +1,47 @@
 cmake_minimum_required(VERSION 3.20)
 
 # Include Directories for projects to be aware of #
-include_directories(vendor/Vulkan/include)
+add_subdirectory(vendor/Vulkan/Vulkan_Headers)
+
+
+include_directories(vendor/Vulkan/Vulkan_Headers/include)
 include_directories(src)
+
+################################################
+#    This Section Is For Linking To Vulkan     #
+################################################
+find_package(Vulkan REQUIRED)
+    if(Vulkan_FOUND)
+        message(STATUS "Vulkan Package Was Successfully Found")
+    else()
+        message(STATUS "Vulkan Package Was Unable To Be Found")
+    endif()
+######################################################################################################
+#                     This Is Simply A Sanity Check For Located File Directories                     #
+######################################################################################################
+    if(EXISTS "${VULKAN_SDK}")
+        message(STATUS "Successfully Found The Vulkan SDK. SDK Located At: ${VULKAN_SDK}")
+    else()
+        message(STATUS "Unable To Locate The Vulkan SDK")
+    endif()
+
+    if(EXISTS "${Vulkan_INCLUDE_DIRS}")
+        message(STATUS "Successfully Found The Vulkan Include Directoy Located At: ${Vulkan_INCLUDE_DIRS}")
+    else()
+        message(STATUS "Unable To Locate The Vulkan Include Directory")
+    endif()
+
+    if(EXISTS "${Vulkan_LIBRARY}")
+        message(STATUS "Successfully Found The Vulkan Library Directory Located At: ${Vulkan_LIBRARY}")
+    else()
+        message(STATUS "Unable To Locate The Vulkan SDK")
+    endif()
+    ################################################################## 
+    #Where To Look For The Vulkan Binaries And Libraries For Linking #
+    ################################################################## 
+    link_directories(${Vulkan_INCLUDE_DIRS};${Vulkan_LIBRARY};)
+
+#################### NEED TO VERIFY THE ABOVE WORKS, CURRENTLY UNABLE TO TEST AT THE MOMENT #########################
 
 ################################################
 # This Section Is For Linking To GLFW Later On #
@@ -12,22 +51,7 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)    # Change Option To Build The Te
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # Change Option To Build The Examples
 add_subdirectory(vendor/GLFW)
 
-################################################
-#    This Section Is For Linking To Vulkan     #
-################################################
-find_package(Vulkan)
-    if (NOT ${Vulkan_INCLUDE_DIRS} STREQUAL "")
-        set(VULKAN_PATH ${Vulkan_INCLUDE_DIRS})
-        STRING(REGEX REPLACE "/Include" "" VULKAN_PATH ${Vulkan_INCLUDE_DIRS})
-    endif()
-    if(EXISTS "${VULKAN_PATH}")
-        message(STATUS "Successfully Found The Vulkan SDK. SDK Located At: ${VULKAN_PATH}")
-    else()
-        message(STATUS "Unable To Locate The Vulkan SDK")
-    endif()
-    ### Where To Look For The Vulkan Binaries And Libraries ####
-    link_directories(${VULKAN_PATH}/Bin;${VULKAN_PATH}/Lib;)
-#################### NEED TO VERIFY THIS WORKS, CURRENTLY UNABLE TO TEST AT THE MOMENT #########################
+
 
 # cmakeSettings is the root folder for where other .cmake files will live
 

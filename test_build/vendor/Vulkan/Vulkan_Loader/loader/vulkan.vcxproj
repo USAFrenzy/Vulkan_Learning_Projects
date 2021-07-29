@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{917D8B2B-86BB-39BF-A53F-0EC990A0A0ED}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>vulkan</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vulkan.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vulkan-1</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">vulkan.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">vulkan-1</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader\generated;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Headers\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;DEBUG;API_NAME="Vulkan";VK_ENABLE_BETA_EXTENSIONS;VK_USE_PLATFORM_WIN32_KHR;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR="Debug";vulkan_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;DEBUG;API_NAME=\"Vulkan\";VK_ENABLE_BETA_EXTENSIONS;VK_USE_PLATFORM_WIN32_KHR;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR=\"Debug\";vulkan_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader\generated;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Headers\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <MASM>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;DEBUG;API_NAME="Vulkan";VK_ENABLE_BETA_EXTENSIONS;VK_USE_PLATFORM_WIN32_KHR;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR="Debug";vulkan_EXPORTS</PreprocessorDefinitions>
+      <IncludePaths>E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader\generated;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Headers\include;%(IncludePaths)</IncludePaths>
+    </MASM>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader\generated;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Headers\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>cfgmgr32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64 /guard:cf</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build/vendor/Vulkan/Vulkan_Loader/loader/Debug/vulkan-1.lib</ImportLibrary>
+      <ModuleDefinitionFile>E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Loader/loader/vulkan-1.def</ModuleDefinitionFile>
+      <ProgramDataBaseFile>E:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build/vendor/Vulkan/Vulkan_Loader/loader/Debug/vulkan-1.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader\generated;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Headers\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;NDEBUG;API_NAME="Vulkan";VK_ENABLE_BETA_EXTENSIONS;VK_USE_PLATFORM_WIN32_KHR;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR="Release";vulkan_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;NDEBUG;API_NAME=\"Vulkan\";VK_ENABLE_BETA_EXTENSIONS;VK_USE_PLATFORM_WIN32_KHR;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR=\"Release\";vulkan_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader\generated;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Headers\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <MASM>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;NDEBUG;API_NAME="Vulkan";VK_ENABLE_BETA_EXTENSIONS;VK_USE_PLATFORM_WIN32_KHR;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR="Release";vulkan_EXPORTS</PreprocessorDefinitions>
+      <IncludePaths>E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader\generated;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Headers\include;%(IncludePaths)</IncludePaths>
+    </MASM>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader\generated;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Headers\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>cfgmgr32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64 /guard:cf</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build/vendor/Vulkan/Vulkan_Loader/loader/Release/vulkan-1.lib</ImportLibrary>
+      <ModuleDefinitionFile>E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Loader/loader/vulkan-1.def</ModuleDefinitionFile>
+      <ProgramDataBaseFile>E:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build/vendor/Vulkan/Vulkan_Loader/loader/Release/vulkan-1.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader\CMakeLists.txt">
+      <StdOutEncoding>UTF-8</StdOutEncoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Loader/loader/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"E:\Programming Tools\CMake\bin\cmake.exe" "-SE:/Dev/Learning Projects/Vulkan_Learning_Projects" "-BE:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build" --check-stamp-file "E:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build/vendor/Vulkan/Vulkan_Loader/loader/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\CMakeFiles\3.21.0\CMakeASM_MASMCompiler.cmake;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader\loader_cmake_config.h.in;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeASMCompiler.cmake.in;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeASMInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeASM_MASMInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeCompilerIdDetection.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeDetermineASMCompiler.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeDetermineASM_MASMCompiler.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeDetermineCompiler.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeDetermineCompilerId.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeFindBinUtils.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeTestASMCompiler.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeTestASM_MASMCompiler.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CheckFunctionExists.c;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CheckFunctionExists.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CheckIncludeFile.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\FindPackageHandleStandardArgs.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\FindPackageMessage.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\FindPkgConfig.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Loader/loader/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"E:\Programming Tools\CMake\bin\cmake.exe" "-SE:/Dev/Learning Projects/Vulkan_Learning_Projects" "-BE:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build" --check-stamp-file "E:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build/vendor/Vulkan/Vulkan_Loader/loader/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\CMakeFiles\3.21.0\CMakeASM_MASMCompiler.cmake;E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader\loader_cmake_config.h.in;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeASMCompiler.cmake.in;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeASMInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeASM_MASMInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeCompilerIdDetection.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeDetermineASMCompiler.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeDetermineASM_MASMCompiler.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeDetermineCompiler.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeDetermineCompilerId.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeFindBinUtils.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeTestASMCompiler.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeTestASM_MASMCompiler.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CheckFunctionExists.c;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CheckFunctionExists.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CheckIncludeFile.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\FindPackageHandleStandardArgs.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\FindPackageMessage.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\FindPkgConfig.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-opt.dir\$(Configuration)\dev_ext_trampoline.obj" />
+    <Object Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-opt.dir\$(Configuration)\phys_dev_ext.obj" />
+    <Object Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-norm.dir\$(Configuration)\extension_manual.obj" />
+    <Object Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-norm.dir\$(Configuration)\loader.obj" />
+    <Object Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-norm.dir\$(Configuration)\trampoline.obj" />
+    <Object Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-norm.dir\$(Configuration)\wsi.obj" />
+    <Object Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-norm.dir\$(Configuration)\debug_utils.obj" />
+    <Object Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-norm.dir\$(Configuration)\cJSON.obj" />
+    <Object Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-norm.dir\$(Configuration)\murmurhash.obj" />
+    <Object Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-norm.dir\$(Configuration)\dirent_on_windows.obj" />
+    <Object Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-unknown-chain.dir\$(Configuration)\unknown_ext_chain_masm.obj" />
+    <None Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader\vulkan-1.def" />
+    <ResourceCompile Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\loader\loader.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\ZERO_CHECK.vcxproj">
+      <Project>{41A403C6-7E8A-39BB-8E48-BC7B60B46233}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-norm.vcxproj">
+      <Project>{74B5E6A4-5331-3D4C-A153-E729393ED651}</Project>
+      <Name>loader-norm</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-opt.vcxproj">
+      <Project>{E86B9A3F-EA41-38FA-8955-82996CD0A08A}</Project>
+      <Name>loader-opt</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader-unknown-chain.vcxproj">
+      <Project>{D03EB976-9CB0-38EC-B638-06D7C5F34B6A}</Project>
+      <Name>loader-unknown-chain</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\loader\loader_asm_gen_files.vcxproj">
+      <Project>{77C0B1A2-F786-31B3-AA48-A4DFF4010AB7}</Project>
+      <Name>loader_asm_gen_files</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>

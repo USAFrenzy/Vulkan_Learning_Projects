@@ -1,0 +1,11 @@
+# CMake generation dependency list for this directory.
+E:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build/CMakeFiles/3.21.0/CMakeSystem.cmake
+E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Headers/CMakeLists.txt
+E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Headers/cmake/cmake_uninstall.cmake.in
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeGenericSystem.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/GNUInstallDirs.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/Platform/Windows.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/Platform/WindowsPaths.cmake

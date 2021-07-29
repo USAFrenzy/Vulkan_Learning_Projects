@@ -19,7 +19,7 @@ class BaseApplication
 		void applicationLoop( );
 		void vulkanInit( );
 		void vulkanFree( );
-		VkInstance instance;
+		VkInstance instance = { };
      
 };
 

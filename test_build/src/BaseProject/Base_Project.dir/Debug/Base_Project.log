@@ -1,0 +1,7 @@
+﻿  Building Custom Rule E:/Dev/Learning Projects/Vulkan_Learning_Projects/src/BaseProject/CMakeLists.txt
+  main.cpp
+  base.cpp
+  window.cpp
+  Generating Code...
+base.obj : error LNK2019: unresolved external symbol vkCreateInstance referenced in function "public: void __cdecl BaseApplication::createInstance(void)" (?createInstance@BaseApplication@@QEAAXXZ)
+E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\lib\Debug\Base_Project.exe : fatal error LNK1120: 1 unresolved externals

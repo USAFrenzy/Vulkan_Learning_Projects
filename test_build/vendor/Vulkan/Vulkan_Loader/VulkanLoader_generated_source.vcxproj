@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{56ED4C71-8595-3CB7-886C-3E6CFB357CCB}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>VulkanLoader_generated_source</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\CMakeFiles\af623c48ad527607463b8c53b4473d2e\VulkanLoader_generated_source.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+C:\Users\mccul\AppData\Local\Programs\Python\Python39\python.exe "E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Loader/scripts/generate_source.py" "E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Headers/registry" --incremental
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\CMakeFiles\VulkanLoader_generated_source</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</VerifyInputsAndOutputsExist>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+C:\Users\mccul\AppData\Local\Programs\Python\Python39\python.exe "E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Loader/scripts/generate_source.py" "E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Headers/registry" --incremental
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\CMakeFiles\VulkanLoader_generated_source</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</VerifyInputsAndOutputsExist>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\vendor\Vulkan\Vulkan_Loader\CMakeLists.txt">
+      <StdOutEncoding>UTF-8</StdOutEncoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Loader/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"E:\Programming Tools\CMake\bin\cmake.exe" "-SE:/Dev/Learning Projects/Vulkan_Learning_Projects" "-BE:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build" --check-stamp-file "E:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build/vendor/Vulkan/Vulkan_Loader/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\CMakeFiles\3.21.0\CMakeCCompiler.cmake;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\CMakeFiles\3.21.0\CMakeCXXCompiler.cmake;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\CMakeFiles\3.21.0\CMakeRCCompiler.cmake;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\CMakeFiles\3.21.0\CMakeSystem.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeCInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeCXXInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeCommonLanguageInclude.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeGenericSystem.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeInitializeConfigs.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeLanguageInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeRCInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeSystemSpecificInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeSystemSpecificInitialize.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Compiler\CMakeCommonCompilerMacros.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Compiler\MSVC-C.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Compiler\MSVC-CXX.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\FindPackageHandleStandardArgs.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\FindPackageMessage.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\FindPythonInterp.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\GNUInstallDirs.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Platform\Windows-MSVC-C.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Platform\Windows-MSVC-CXX.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Platform\Windows-MSVC.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Platform\Windows.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Loader/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"E:\Programming Tools\CMake\bin\cmake.exe" "-SE:/Dev/Learning Projects/Vulkan_Learning_Projects" "-BE:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build" --check-stamp-file "E:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build/vendor/Vulkan/Vulkan_Loader/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\CMakeFiles\3.21.0\CMakeCCompiler.cmake;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\CMakeFiles\3.21.0\CMakeCXXCompiler.cmake;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\CMakeFiles\3.21.0\CMakeRCCompiler.cmake;E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\CMakeFiles\3.21.0\CMakeSystem.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeCInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeCXXInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeCommonLanguageInclude.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeGenericSystem.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeInitializeConfigs.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeLanguageInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeRCInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeSystemSpecificInformation.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\CMakeSystemSpecificInitialize.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Compiler\CMakeCommonCompilerMacros.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Compiler\MSVC-C.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Compiler\MSVC-CXX.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\FindPackageHandleStandardArgs.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\FindPackageMessage.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\FindPythonInterp.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\GNUInstallDirs.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Platform\Windows-MSVC-C.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Platform\Windows-MSVC-CXX.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Platform\Windows-MSVC.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Platform\Windows.cmake;E:\Programming Tools\CMake\share\cmake-3.21\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\vendor\Vulkan\Vulkan_Loader\CMakeFiles\VulkanLoader_generated_source">
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="E:\Dev\Learning Projects\Vulkan_Learning_Projects\test_build\ZERO_CHECK.vcxproj">
+      <Project>{41A403C6-7E8A-39BB-8E48-BC7B60B46233}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>

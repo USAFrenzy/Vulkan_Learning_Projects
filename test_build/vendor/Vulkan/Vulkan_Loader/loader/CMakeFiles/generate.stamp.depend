@@ -1,0 +1,21 @@
+# CMake generation dependency list for this directory.
+E:/Dev/Learning Projects/Vulkan_Learning_Projects/test_build/CMakeFiles/3.21.0/CMakeASM_MASMCompiler.cmake
+E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Loader/loader/CMakeLists.txt
+E:/Dev/Learning Projects/Vulkan_Learning_Projects/vendor/Vulkan/Vulkan_Loader/loader/loader_cmake_config.h.in
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeASMCompiler.cmake.in
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeASMInformation.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeASM_MASMInformation.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeCompilerIdDetection.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeDetermineASMCompiler.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeDetermineASM_MASMCompiler.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeDetermineCompiler.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeDetermineCompilerId.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeFindBinUtils.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeTestASMCompiler.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CMakeTestASM_MASMCompiler.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CheckFunctionExists.c
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CheckFunctionExists.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/CheckIncludeFile.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/FindPackageMessage.cmake
+E:/Programming Tools/CMake/share/cmake-3.21/Modules/FindPkgConfig.cmake

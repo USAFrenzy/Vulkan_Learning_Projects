@@ -27,6 +27,8 @@ ${IMPLEMENTATION_FILES}
 add_executable(${PROJECT_NAME} ${ALL_FILES})
 
 target_link_libraries(${PROJECT_NAME} glfw ${GLFW_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${Vulkan_LIBRARIES})
+
 
 ##################################################
 #     Target name For Configuration Builds       #
