@@ -1,21 +1,19 @@
 cmake_minimum_required(VERSION 3.20)
 
+#######################################
+# Meta Data such as name and revision #
+#######################################
+include(cmakeSettings/MetaData.cmake)      
+    project(${META_PROJECT_NAME} LANGUAGES CXX)
+
+
 # Include Directories for projects to be aware of #
-add_subdirectory(vendor/Vulkan/Vulkan_Headers)
-
-
-include_directories(vendor/Vulkan/Vulkan_Headers/include)
 include_directories(src)
 
 ################################################
 #    This Section Is For Linking To Vulkan     #
 ################################################
 find_package(Vulkan REQUIRED)
-    if(Vulkan_FOUND)
-        message(STATUS "Vulkan Package Was Successfully Found")
-    else()
-        message(STATUS "Vulkan Package Was Unable To Be Found")
-    endif()
 ######################################################################################################
 #                     This Is Simply A Sanity Check For Located File Directories                     #
 ######################################################################################################
@@ -34,13 +32,8 @@ find_package(Vulkan REQUIRED)
     if(EXISTS "${Vulkan_LIBRARY}")
         message(STATUS "Successfully Found The Vulkan Library Directory Located At: ${Vulkan_LIBRARY}")
     else()
-        message(STATUS "Unable To Locate The Vulkan SDK")
+        message(STATUS "Unable To Locate The Vulkan Library")
     endif()
-    ################################################################## 
-    #Where To Look For The Vulkan Binaries And Libraries For Linking #
-    ################################################################## 
-    link_directories(${Vulkan_INCLUDE_DIRS};${Vulkan_LIBRARY};)
-
 #################### NEED TO VERIFY THE ABOVE WORKS, CURRENTLY UNABLE TO TEST AT THE MOMENT #########################
 
 ################################################
@@ -51,18 +44,16 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)    # Change Option To Build The Te
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # Change Option To Build The Examples
 add_subdirectory(vendor/GLFW)
 
-
+################################################################## 
+#       Where To Look For The Vulkan Libraries For Linking       #
+################################################################## 
+link_directories(${Vulkan_INCLUDE_DIRS};${Vulkan_LIBRARY}; ${GLFW_LIBRARIES})
 
 # cmakeSettings is the root folder for where other .cmake files will live
 
 include(cmakeSettings/PreventInSrcBuilds.cmake) 
     assureoutofsourcebuilds()
 
-#######################################
-# Meta Data such as name and revision #
-#######################################
-include(cmakeSettings/MetaData.cmake)      
-    project(${META_PROJECT_NAME} LANGUAGES CXX)
 
 ###################################################################################
 #                        Project Options                                          #

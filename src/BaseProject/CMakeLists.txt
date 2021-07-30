@@ -2,8 +2,6 @@ set(PROJECT_NAME Base_Project)
 
 message(CHECK_START "Building The Initial Base Project")
 
-include_directories(${CMAKE_SOURCE_DIR}/src/BaseProject)
-
 set(HEADER_FILES
 "Base/base.h"
 "Window/window.h"
@@ -25,9 +23,14 @@ ${IMPLEMENTATION_FILES}
 
 
 add_executable(${PROJECT_NAME} ${ALL_FILES})
-
+target_include_directories(${PROJECT_NAME} 
+PUBLIC
+${Vulkan_INCLUDE_DIRS}
+${GLFW_INCLUDE_DIRS}
+${CMAKE_SOURCE_DIR}/src/BaseProject
+)
 target_link_libraries(${PROJECT_NAME} glfw ${GLFW_LIBRARIES})
-target_link_libraries(${PROJECT_NAME} ${Vulkan_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} Vulkan::Vulkan)
 
 
 ##################################################
