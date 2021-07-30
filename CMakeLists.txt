@@ -14,27 +14,6 @@ include_directories(src)
 #    This Section Is For Linking To Vulkan     #
 ################################################
 find_package(Vulkan REQUIRED)
-######################################################################################################
-#                     This Is Simply A Sanity Check For Located File Directories                     #
-######################################################################################################
-    if(EXISTS "${VULKAN_SDK}")
-        message(STATUS "Successfully Found The Vulkan SDK. SDK Located At: ${VULKAN_SDK}")
-    else()
-        message(STATUS "Unable To Locate The Vulkan SDK")
-    endif()
-
-    if(EXISTS "${Vulkan_INCLUDE_DIRS}")
-        message(STATUS "Successfully Found The Vulkan Include Directoy Located At: ${Vulkan_INCLUDE_DIRS}")
-    else()
-        message(STATUS "Unable To Locate The Vulkan Include Directory")
-    endif()
-
-    if(EXISTS "${Vulkan_LIBRARY}")
-        message(STATUS "Successfully Found The Vulkan Library Directory Located At: ${Vulkan_LIBRARY}")
-    else()
-        message(STATUS "Unable To Locate The Vulkan Library")
-    endif()
-#################### NEED TO VERIFY THE ABOVE WORKS, CURRENTLY UNABLE TO TEST AT THE MOMENT #########################
 
 ################################################
 # This Section Is For Linking To GLFW Later On #
@@ -47,7 +26,7 @@ add_subdirectory(vendor/GLFW)
 ################################################################## 
 #       Where To Look For The Vulkan Libraries For Linking       #
 ################################################################## 
-link_directories(${Vulkan_INCLUDE_DIRS};${Vulkan_LIBRARY}; ${GLFW_LIBRARIES})
+link_directories(${Vulkan_INCLUDE_DIRS}; ${Vulkan_LIBRARY}; ${GLFW_LIBRARIES})
 
 # cmakeSettings is the root folder for where other .cmake files will live
 
