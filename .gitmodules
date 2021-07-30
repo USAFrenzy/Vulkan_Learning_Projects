@@ -4,7 +4,4 @@
 [submodule "vendor/GLM"]
 	path = vendor/GLM
 	url = https://github.com/g-truc/glm.git
-[submodule "vendor/Vulkan/Vulkan_Headers"]
-	path = vendor/Vulkan/Vulkan_Headers
-	url = https://github.com/KhronosGroup/Vulkan-Headers.git
 
