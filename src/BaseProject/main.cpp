@@ -5,22 +5,16 @@
 #include <stdexcept>
 
 
-int main()
+int main( )
 {
-    std::cout << "Testing Initial Setup\n\n";
-        
-  
-    BaseApplication app;
-    
-    try
-    {
-        app.Run();
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    
+	std::cout << "Testing Initial Setup\n\n";
 
-   
+
+	BaseApplication app;
+
+	try {
+		app.Run( );
+	} catch(const std::exception& e) {
+		std::cerr << e.what( ) << '\n';
+	}
 }
