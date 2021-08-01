@@ -11,6 +11,7 @@ int main( )
 
 
 	BaseApplication app;
+	app.AddValidationLayer("VK_LAYER_KHRONOS_validation");
 
 	try {
 		app.Run( );
