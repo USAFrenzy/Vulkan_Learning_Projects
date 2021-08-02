@@ -4,6 +4,17 @@
 #include <vector>
 #include "Window/window.h"
 
+// below macro is just for internal toggles -> 0 Being "OFF"
+#define INTERNAL_DEBUG  1
+#define VULKAN_API_USED VK_API_VERSION_1_2
+#define GLFW_API_USED   340
+
+#if INTERNAL_DEBUG
+const bool enableValidationLayers = true;
+#else
+const bool enableValidationLayers = false;
+#endif
+
 class BaseApplication
 {
       public:
@@ -21,19 +32,16 @@ class BaseApplication
 	void Run( );
 	void CreateInstance( );
 	std::vector<VkExtensionProperties> QueryAvailableVulkanExtensions( );
+	// Would Like To Abstract Away If I Decide To Not Use GLFW In The Future
+	std::vector<const char*> QueryRequiredExtensions( );
 	void AddValidationLayer(const char* layerName);
 	bool CheckValidationLayerSupport( );
 
 	void DebugMessengerInit( );
 	void DebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
-
-	// Would Like To Abstract Away If I Decide To Not Use GLFW In The Future
-	std::vector<const char*> QueryRequiredExtensions( );
-
 	static void DestroyDebugUtilsMessengerEXT(VkInstance instance,
 						  VkDebugUtilsMessengerEXT debugMessenger,
 						  const VkAllocationCallbacks* pAllocator);
-
 
 	// Temporary/Basic Debugging Functions
 	void PrintAvailableVulkanExtensions(std::vector<VkExtensionProperties> supportedExtensionsList);
@@ -42,14 +50,12 @@ class BaseApplication
 	std::string GetVulkanVersionStr( );
 	std::string GetGLFWVersionStr( );
 
-
       private:
 	Window windowContext {windowWidth, windowLength, windowTitle};
 	void ApplicationLoop( );
 	void VulkanInit( );
 	void VulkanFree( );
 };
-
 // Proxy Function Used To Look Up The Address of vkCreateDebugUtilsMessengerEXT extension function and
 // create that object or returns with a failure code
 static VkResult CreateDebugUtilsMessengerEXT(VkInstance instance,
@@ -66,6 +72,5 @@ static VkResult CreateDebugUtilsMessengerEXT(VkInstance instance,
 		return VK_ERROR_EXTENSION_NOT_PRESENT;
 	}
 }
-
 
 #endif // !BASE.H

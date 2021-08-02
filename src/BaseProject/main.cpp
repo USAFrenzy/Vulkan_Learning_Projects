@@ -4,7 +4,6 @@
 #include <iostream>
 #include <stdexcept>
 
-
 int main( )
 {
 	std::cout << "Testing Initial Setup\n\n";

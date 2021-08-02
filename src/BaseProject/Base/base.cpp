@@ -1,21 +1,8 @@
 #include "base.h"
-
 #include <iostream>
 
 // All manual print messages are just temporary "debug" type at the moment (still working on a homebrew logger in a
-// separate project) below macro is just for internal toggles -> 0 Being "OFF"
-#define INTERNAL_DEBUG  1
-#define VULKAN_API_USED VK_API_VERSION_1_2
-
-#define GLFW_API_USED 340
-
-
-#if INTERNAL_DEBUG
-const bool enableValidationLayers = true;
-#else
-const bool enableValidationLayers = false;
-#endif
-
+// separate project)
 
 BaseApplication::BaseApplication( )
 {
