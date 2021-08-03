@@ -2,7 +2,7 @@
 #include "window.h"
 
 
-Window::Window(int height, int width, std::string title)
+Window::Window(int height, int width, const char* title)
   : windowHeight(height), windowWidth(width), windowTitle(title)
 {
 	createWindow( );
@@ -26,7 +26,7 @@ void Window::createWindow( )
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	// Fourth Parameter is Window Mode And Fifth Parameter Is For OpenGL context
-	window = glfwCreateWindow(windowWidth, windowHeight, windowTitle.c_str( ), nullptr, nullptr);
+	window = glfwCreateWindow(windowWidth, windowHeight, windowTitle, nullptr, nullptr);
 }
 
 // Temporary Functions Until Event Handler Implemented

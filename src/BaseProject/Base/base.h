@@ -2,6 +2,8 @@
 #define BASE_H
 
 #include <vector>
+#include <string>
+
 #include "Window/window.h"
 
 // below macro is just for internal toggles -> 0 Being "OFF"
@@ -17,17 +19,10 @@ const bool enableValidationLayers = false;
 
 class BaseApplication
 {
-      public:
-	const int windowWidth {480}, windowLength {640};
-	std::string windowTitle {"Base Application"};
 
-      private:
-	VkInstance instance = VK_NULL_HANDLE;
-	std::vector<const char*> validationLayers;
-	VkDebugUtilsMessengerEXT debugMessenger;
 
       public:
-	BaseApplication( );
+	BaseApplication(const int windowWidth, const int windowLength, const char* wind);
 	~BaseApplication( );
 	void Run( );
 	void CreateInstance( );
@@ -51,10 +46,18 @@ class BaseApplication
 	std::string GetGLFWVersionStr( );
 
       private:
-	Window windowContext {windowWidth, windowLength, windowTitle};
+	const int windowWidth                     = 480;
+	const int windowHeight                    = 640;
+	const char* windowTitle                   = "Base Application";
+	VkInstance instance                       = VK_NULL_HANDLE;
+	std::vector<const char*> validationLayers = { };
+	VkDebugUtilsMessengerEXT debugMessenger   = VK_NULL_HANDLE;
+
+      private:
 	void ApplicationLoop( );
 	void VulkanInit( );
 	void VulkanFree( );
+	Window windowContext {windowWidth, windowHeight, windowTitle};
 };
 // Proxy Function Used To Look Up The Address of vkCreateDebugUtilsMessengerEXT extension function and
 // create that object or returns with a failure code

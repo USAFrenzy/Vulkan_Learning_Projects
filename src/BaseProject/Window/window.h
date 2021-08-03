@@ -15,12 +15,12 @@
 
 #include <vulkan/vulkan.h>
 #include <GLFW/glfw3.h>
-#include <string>
+
 
 class Window
 {
       public:
-	Window(int height, int width, std::string title);
+	Window(int height, int width, const char* title);
 	~Window( );
 
 	// Temporary Functions Until Event Handler Implemented
@@ -37,7 +37,7 @@ class Window
 	GLFWwindow* window;
 	const int windowHeight;
 	const int windowWidth;
-	std::string windowTitle;
+	const char* windowTitle;
 };
 
 

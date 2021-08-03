@@ -4,7 +4,8 @@
 // All manual print messages are just temporary "debug" type at the moment (still working on a homebrew logger in a
 // separate project)
 
-BaseApplication::BaseApplication( )
+BaseApplication::BaseApplication(const int width, const int height, const char* title) 
+	: windowWidth(width), windowHeight(height), windowTitle(title)
 {
 	std::cout << "Base Application Object Created\n";
 }
@@ -83,7 +84,7 @@ void BaseApplication::CreateInstance( )
 	appCreateInfo.enabledExtensionCount   = static_cast<uint32_t>(extensions.size( ));
 	appCreateInfo.ppEnabledExtensionNames = extensions.data( );
 	// When More Layers Are Added - ABSOLUTELY NEED to ensure proper ordering (only one layer at the moment)
-	VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo;
+	VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo = { };
 	if(enableValidationLayers) {
 		appCreateInfo.enabledLayerCount   = static_cast<uint32_t>(validationLayers.size( ));
 		appCreateInfo.ppEnabledLayerNames = validationLayers.data( );
@@ -238,6 +239,7 @@ void BaseApplication::DestroyDebugUtilsMessengerEXT(VkInstance instance,
 void BaseApplication::DebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo)
 {
 	createInfo.sType           = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+	// createInfo.pNext           = nullptr;
 	createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
 				     VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
 				     VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
