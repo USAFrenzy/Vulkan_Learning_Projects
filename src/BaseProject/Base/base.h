@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <string>
-
 #include "Window/window.h"
 
 // below macro is just for internal toggles -> 0 Being "OFF"
@@ -43,8 +42,8 @@ class BaseApplication
 	void const PrintAvailableVulkanExtensions(std::vector<VkExtensionProperties> supportedExtensionsList);
 	void const PrintValidationLayerCheck( );
 	void const PrintRequiredGLFWExtensions( );
-	const char* const GetVulkanVersionStr( );
-	const char* const GetGLFWVersionStr( );
+	std::string const GetVulkanVersionStr( );
+	std::string const GetGLFWVersionStr( );
 
       private:
 	const int windowWidth   = 480;
@@ -85,9 +84,15 @@ static VkResult CreateDebugUtilsMessengerEXT(VkInstance instance,
 #pragma warning(pop)
 
 #if PRINT_INTERNAL_DB_MESSAGES
-template <typename... Args> void dbPrint(const char* f, Args... args)
+/*
+	This was supposed to be a starter to a stop-gap to logging by wrapping printf() in a define without
+	affecting solo printf()'s but unfortunately, the way it is now, it can't print the version strings when
+	formatted. Variadic templates are a new thing to me so I might be using them wrong when implementing them
+	and it could even be that function scope in the Get...Str() functions is actually my issue here
+*/
+template <typename... Args> void dbPrint(const char* message, Args... args)
 {
-	printf(f, args...);
+	printf(message, args...);
 }
 #endif // PRINT_INTERNAL_DB_MESSAGES
 

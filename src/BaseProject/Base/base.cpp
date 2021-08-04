@@ -58,8 +58,10 @@ void BaseApplication::VulkanFree( )
 void BaseApplication::CreateInstance( )
 {
 #if INTERNAL_DEBUG
-	dbPrint("Vulkan Version: %s \n", GetVulkanVersionStr( ));
-	dbPrint("GLFW Version: %s \n", GetGLFWVersionStr( ));
+	#if PRINT_INTERNAL_DB_MESSAGES
+	std::cout << "Vulkan Version: " << GetVulkanVersionStr( ) << "\n";
+	std::cout << "GLFW Version: " << GetGLFWVersionStr( ) << "\n";
+	#endif
 	PrintAvailableVulkanExtensions(QueryAvailableVulkanExtensions( ));
 	if(enableValidationLayers && !CheckValidationLayerSupport( )) {
 		throw std::runtime_error("ERROR: Validation Layers Were Requested But Are Not Available\n");
@@ -155,9 +157,9 @@ void const BaseApplication::PrintValidationLayerCheck( )
 	printf("Available Validation Layers \n");
 	for(auto& layer : validationLayers) {
 		if(CheckValidationLayerSupport( )) {
-			printf("Supported Validation Layer: \n\t %s \n", layer);
+			printf("\tSupported Validation Layer(s): \n\t- %s \n", layer);
 		} else {
-			printf("Unsupported Validation Layer: \n\t %s \n", layer);
+			printf("\tUnsupported Validation Layer(s): \n\t- %s \n", layer);
 		}
 	}
 }
@@ -183,25 +185,24 @@ void const BaseApplication::PrintRequiredGLFWExtensions( )
 	}
 }
 
-const char* const BaseApplication::GetVulkanVersionStr( )
+std::string const BaseApplication::GetVulkanVersionStr( )
 {
 	uint32_t instanceVersion = VULKAN_API_USED;
 	std::string major, minor, patch;
 	auto FN_vkEnumerateInstanceVersion =
 	  PFN_vkEnumerateInstanceVersion(vkGetInstanceProcAddr(nullptr, "vkEnumerateInstanceVersion"));
 	vkEnumerateInstanceVersion(&instanceVersion);
-	major                   = std::to_string(VK_API_VERSION_MAJOR(instanceVersion));
-	minor                   = std::to_string(VK_API_VERSION_MINOR(instanceVersion));
-	patch                   = std::to_string(VK_API_VERSION_PATCH(instanceVersion));
-	return (major + "." + minor + "." + patch).c_str();
-
+	major = std::to_string(VK_API_VERSION_MAJOR(instanceVersion));
+	minor = std::to_string(VK_API_VERSION_MINOR(instanceVersion));
+	patch = std::to_string(VK_API_VERSION_PATCH(instanceVersion));
+	return (major + "." + minor + "." + patch);
 }
 
-const char* const BaseApplication::GetGLFWVersionStr( )
+std::string const BaseApplication::GetGLFWVersionStr( )
 {
-	return (std::to_string(GLFW_VERSION_MAJOR) + "." + std::to_string(GLFW_VERSION_MINOR) +
-				  "." + std::to_string(GLFW_VERSION_REVISION)).c_str();
-
+	return (std::to_string(GLFW_VERSION_MAJOR) + "." + std::to_string(GLFW_VERSION_MINOR) + "." +
+		std::to_string(GLFW_VERSION_REVISION))
+	  .c_str( );
 }
 
 // disabling the unscoped enum warning as it's not this code base causing it but Vulkan
