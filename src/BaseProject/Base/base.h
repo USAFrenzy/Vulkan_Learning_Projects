@@ -7,9 +7,10 @@
 #include "Window/window.h"
 
 // below macro is just for internal toggles -> 0 Being "OFF"
-#define INTERNAL_DEBUG  1
-#define VULKAN_API_USED VK_API_VERSION_1_2
-#define GLFW_API_USED   340
+#define INTERNAL_DEBUG             1
+#define PRINT_INTERNAL_DB_MESSAGES 1
+#define VULKAN_API_USED            VK_API_VERSION_1_2
+#define GLFW_API_USED              340
 
 #if INTERNAL_DEBUG
 const bool enableValidationLayers = true;
@@ -19,8 +20,6 @@ const bool enableValidationLayers = false;
 
 class BaseApplication
 {
-
-
       public:
 	BaseApplication(const int windowWidth, const int windowLength, const char* wind);
 	~BaseApplication( );
@@ -30,28 +29,31 @@ class BaseApplication
 	// Would Like To Abstract Away If I Decide To Not Use GLFW In The Future
 	std::vector<const char*> QueryRequiredExtensions( );
 	void AddValidationLayer(const char* layerName);
-	bool CheckValidationLayerSupport( );
+	bool const CheckValidationLayerSupport( );
 
 	void DebugMessengerInit( );
 	void DebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
 	static void DestroyDebugUtilsMessengerEXT(VkInstance instance,
 						  VkDebugUtilsMessengerEXT debugMessenger,
 						  const VkAllocationCallbacks* pAllocator);
+	void QueryPhysicalDevices( );
+	int WeighDeviceSuitability(VkPhysicalDevice device);
 
 	// Temporary/Basic Debugging Functions
-	void PrintAvailableVulkanExtensions(std::vector<VkExtensionProperties> supportedExtensionsList);
-	void PrintValidationLayerCheck( );
-	void PrintRequiredGLFWExtensions( );
-	std::string GetVulkanVersionStr( );
-	std::string GetGLFWVersionStr( );
+	void const PrintAvailableVulkanExtensions(std::vector<VkExtensionProperties> supportedExtensionsList);
+	void const PrintValidationLayerCheck( );
+	void const PrintRequiredGLFWExtensions( );
+	const char* const GetVulkanVersionStr( );
+	const char* const GetGLFWVersionStr( );
 
       private:
-	const int windowWidth                     = 480;
-	const int windowHeight                    = 640;
-	const char* windowTitle                   = "Base Application";
-	VkInstance instance                       = VK_NULL_HANDLE;
-	std::vector<const char*> validationLayers = { };
-	VkDebugUtilsMessengerEXT debugMessenger   = VK_NULL_HANDLE;
+	const int windowWidth   = 480;
+	const int windowHeight  = 640;
+	const char* windowTitle = "Base Application";
+	VkInstance instance     = VK_NULL_HANDLE;
+	std::vector<const char*> validationLayers;
+	VkDebugUtilsMessengerEXT debugMessenger = VK_NULL_HANDLE;
+	VkPhysicalDevice physicalDevice         = VK_NULL_HANDLE;
 
       private:
 	void ApplicationLoop( );
@@ -59,8 +61,13 @@ class BaseApplication
 	void VulkanFree( );
 	Window windowContext {windowWidth, windowHeight, windowTitle};
 };
-// Proxy Function Used To Look Up The Address of vkCreateDebugUtilsMessengerEXT extension function and
-// create that object or returns with a failure code
+/*
+	Proxy Function Used To Look Up The Address of vkCreateDebugUtilsMessengerEXT extension function and
+	create that object or returns with a failure code
+*/
+// disabling the unscoped enum warning as it's not this code base causing it but Vulkan
+#pragma warning(push)
+#pragma warning(disable : 26812)
 static VkResult CreateDebugUtilsMessengerEXT(VkInstance instance,
 					     const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
 					     const VkAllocationCallbacks* pAllocator,
@@ -75,5 +82,13 @@ static VkResult CreateDebugUtilsMessengerEXT(VkInstance instance,
 		return VK_ERROR_EXTENSION_NOT_PRESENT;
 	}
 }
+#pragma warning(pop)
+
+#if PRINT_INTERNAL_DB_MESSAGES
+template <typename... Args> void dbPrint(const char* f, Args... args)
+{
+	printf(f, args...);
+}
+#endif // PRINT_INTERNAL_DB_MESSAGES
 
 #endif // !BASE.H

@@ -1,18 +1,19 @@
 #include "base.h"
 #include <iostream>
+#include <map>
 
 // All manual print messages are just temporary "debug" type at the moment (still working on a homebrew logger in a
 // separate project)
 
-BaseApplication::BaseApplication(const int width, const int height, const char* title) 
-	: windowWidth(width), windowHeight(height), windowTitle(title)
+BaseApplication::BaseApplication(const int width, const int height, const char* title)
+  : windowWidth(width), windowHeight(height), windowTitle(title)
 {
-	std::cout << "Base Application Object Created\n";
+	dbPrint("Base Application Object Created\n");
 }
 
 BaseApplication::~BaseApplication( )
 {
-	std::cout << "Base Application Object Destroyed\n";
+	dbPrint("Base Application Object Destroyed\n");
 }
 
 void BaseApplication::Run( )
@@ -24,43 +25,44 @@ void BaseApplication::Run( )
 
 void BaseApplication::ApplicationLoop( )
 {
-	std::cout << "This Is From The Application Loop Function\n";
-	std::cout << "Polling Window Events\n";
+	dbPrint("This Is From The Application Loop Function\n");
+	dbPrint("Polling Window Events\n");
 	// NOTE: Temporary Code To Allow Window Closing Until Custom Event Handler Is Implemented
 	while(!windowContext.Close( )) {
 		glfwPollEvents( );
 	}
-	std::cout << "Window Closing\n";
+	dbPrint("Window Closing\n");
 }
 
 void BaseApplication::VulkanInit( )
 {
-	std::cout << "This is From The Vulkan Init Funtion\n";
+	dbPrint("This is From The Vulkan Init Funtion\n");
 	CreateInstance( );
 	DebugMessengerInit( );
-	std::cout << "Vulkan Instance Created\n";
+	QueryPhysicalDevices( );
+	dbPrint("Vulkan Instance Created\n");
 }
 
 void BaseApplication::VulkanFree( )
 {
-	std::cout << "This Is From The Vulkan Free Function\n";
+	dbPrint("This Is From The Vulkan Free Function\n");
 	if(enableValidationLayers) {
 		// Third Parameter would be the custom allocator callback
 		DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
 	}
 	// Second Parameter would be the custom allocator callback
 	vkDestroyInstance(instance, nullptr);
-	std::cout << "Vulkan Instance Destroyed\n";
+	dbPrint("Vulkan Instance Destroyed\n");
 }
 
 void BaseApplication::CreateInstance( )
 {
 #if INTERNAL_DEBUG
-	std::cout << "Vulkan Version: " << GetVulkanVersionStr( ) + '\n';
-	std::cout << "GLFW Version: " << GetGLFWVersionStr( ) + '\n';
+	dbPrint("Vulkan Version: %s \n", GetVulkanVersionStr( ));
+	dbPrint("GLFW Version: %s \n", GetGLFWVersionStr( ));
 	PrintAvailableVulkanExtensions(QueryAvailableVulkanExtensions( ));
 	if(enableValidationLayers && !CheckValidationLayerSupport( )) {
-		throw std::runtime_error("ERROR: Validation Layers Were Requested But Are Not Available");
+		throw std::runtime_error("ERROR: Validation Layers Were Requested But Are Not Available\n");
 	}
 	PrintValidationLayerCheck( );
 #endif
@@ -84,7 +86,7 @@ void BaseApplication::CreateInstance( )
 	appCreateInfo.enabledExtensionCount   = static_cast<uint32_t>(extensions.size( ));
 	appCreateInfo.ppEnabledExtensionNames = extensions.data( );
 	// When More Layers Are Added - ABSOLUTELY NEED to ensure proper ordering (only one layer at the moment)
-	VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo = { };
+	VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo;
 	if(enableValidationLayers) {
 		appCreateInfo.enabledLayerCount   = static_cast<uint32_t>(validationLayers.size( ));
 		appCreateInfo.ppEnabledLayerNames = validationLayers.data( );
@@ -96,7 +98,7 @@ void BaseApplication::CreateInstance( )
 	}
 	// second parameter is for a pointer to custom allocator callback
 	if(vkCreateInstance(&appCreateInfo, nullptr, &instance) != VK_SUCCESS) {
-		throw std::runtime_error("Unable To Create Vulkan Instance");
+		throw std::runtime_error("Unable To Create Vulkan Instance\n");
 	}
 }
 
@@ -113,11 +115,12 @@ std::vector<VkExtensionProperties> BaseApplication::QueryAvailableVulkanExtensio
 	return supportedExtensions;
 }
 
-void BaseApplication::PrintAvailableVulkanExtensions(std::vector<VkExtensionProperties> supportedExtensionsList)
+void const
+  BaseApplication::PrintAvailableVulkanExtensions(std::vector<VkExtensionProperties> supportedExtensionsList)
 {
-	std::cout << "Extensions That Are Available From Vulkan:\n";
+	printf("Extensions That Are Available From Vulkan: \n");
 	for(auto& extension : supportedExtensionsList) {
-		std::cout << '\t' << extension.extensionName << "\n";
+		printf("\t %s \n", extension.extensionName);
 	}
 }
 
@@ -126,7 +129,7 @@ void BaseApplication::AddValidationLayer(const char* layerName)
 	validationLayers.emplace_back(layerName);
 }
 
-bool BaseApplication::CheckValidationLayerSupport( )
+bool const BaseApplication::CheckValidationLayerSupport( )
 {
 	uint32_t layerCount;
 	vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
@@ -147,14 +150,14 @@ bool BaseApplication::CheckValidationLayerSupport( )
 	return true;
 }
 
-void BaseApplication::PrintValidationLayerCheck( )
+void const BaseApplication::PrintValidationLayerCheck( )
 {
-	std::cout << "Available Validation Layers\n";
+	printf("Available Validation Layers \n");
 	for(auto& layer : validationLayers) {
 		if(CheckValidationLayerSupport( )) {
-			std::cout << '\t' << "Supported Validation Layer: " << layer << '\n';
+			printf("Supported Validation Layer: \n\t %s \n", layer);
 		} else {
-			std::cout << '\t' << "Unsupported Validation Layer: " << layer << '\n';
+			printf("Unsupported Validation Layer: \n\t %s \n", layer);
 		}
 	}
 }
@@ -171,35 +174,39 @@ std::vector<const char*> BaseApplication::QueryRequiredExtensions( )
 	return extensions;
 }
 
-void BaseApplication::PrintRequiredGLFWExtensions( )
+void const BaseApplication::PrintRequiredGLFWExtensions( )
 {
 	auto extensionList = QueryRequiredExtensions( );
-	std::cout << "Required Extensions For GLFW And Vulkan:\n";
-	for(auto extension : extensionList) {
-		std::cout << '\t' << extension << '\n';
+	printf("Required Extensions For GLFW And Vulkan:\n");
+	for(auto& extension : extensionList) {
+		printf("\t %s \n", extension);
 	}
 }
 
-std::string BaseApplication::GetVulkanVersionStr( )
+const char* const BaseApplication::GetVulkanVersionStr( )
 {
 	uint32_t instanceVersion = VULKAN_API_USED;
 	std::string major, minor, patch;
 	auto FN_vkEnumerateInstanceVersion =
 	  PFN_vkEnumerateInstanceVersion(vkGetInstanceProcAddr(nullptr, "vkEnumerateInstanceVersion"));
 	vkEnumerateInstanceVersion(&instanceVersion);
-	major = std::to_string(VK_API_VERSION_MAJOR(instanceVersion));
-	minor = std::to_string(VK_API_VERSION_MINOR(instanceVersion));
-	patch = std::to_string(VK_API_VERSION_PATCH(instanceVersion));
+	major                   = std::to_string(VK_API_VERSION_MAJOR(instanceVersion));
+	minor                   = std::to_string(VK_API_VERSION_MINOR(instanceVersion));
+	patch                   = std::to_string(VK_API_VERSION_PATCH(instanceVersion));
+	return (major + "." + minor + "." + patch).c_str();
 
-	return major + "." + minor + "." + patch;
 }
 
-std::string BaseApplication::GetGLFWVersionStr( )
+const char* const BaseApplication::GetGLFWVersionStr( )
 {
-	return std::to_string(GLFW_VERSION_MAJOR) + "." + std::to_string(GLFW_VERSION_MINOR) + "." +
-	       std::to_string(GLFW_VERSION_REVISION);
+	return (std::to_string(GLFW_VERSION_MAJOR) + "." + std::to_string(GLFW_VERSION_MINOR) +
+				  "." + std::to_string(GLFW_VERSION_REVISION)).c_str();
+
 }
 
+// disabling the unscoped enum warning as it's not this code base causing it but Vulkan
+#pragma warning(push)
+#pragma warning(disable : 26812)
 static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
 						    VkDebugUtilsMessageTypeFlagsEXT messageType,
 						    const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
@@ -208,6 +215,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityF
 	std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
 	return VK_FALSE;
 }
+#pragma warning(pop)
 
 void BaseApplication::DebugMessengerInit( )
 {
@@ -219,7 +227,7 @@ void BaseApplication::DebugMessengerInit( )
 	VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo = { };
 	DebugMessengerCreateInfo(debugCreateInfo);
 	if(CreateDebugUtilsMessengerEXT(instance, &debugCreateInfo, nullptr, &debugMessenger) != VK_SUCCESS) {
-		throw std::runtime_error("Unable To Setup The Debug Messenger");
+		throw std::runtime_error("Unable To Setup The Debug Messenger\n");
 	}
 }
 
@@ -238,8 +246,8 @@ void BaseApplication::DestroyDebugUtilsMessengerEXT(VkInstance instance,
 
 void BaseApplication::DebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo)
 {
+	createInfo                 = { };
 	createInfo.sType           = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
-	// createInfo.pNext           = nullptr;
 	createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
 				     VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
 				     VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
@@ -249,4 +257,54 @@ void BaseApplication::DebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEX
 	createInfo.pfnUserCallback = debugCallback;
 	createInfo.pUserData       = nullptr; // this would be used as a hook to another struct via a ptr
 	createInfo.flags           = 0;
+}
+
+void BaseApplication::QueryPhysicalDevices( )
+{
+	uint32_t deviceCount {0};
+	vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
+	if(deviceCount == 0) {
+		throw std::runtime_error("Unable To Find A Vulkan Supported GPU\n");
+	}
+	std::vector<VkPhysicalDevice> deviceFamily(deviceCount);
+	vkEnumeratePhysicalDevices(instance, &deviceCount, deviceFamily.data( ));
+
+	std::multimap<int, VkPhysicalDevice> deviceWeight;
+	for(const auto& device : deviceFamily) {
+		int weight = WeighDeviceSuitability(device);
+		deviceWeight.insert(std::make_pair(weight, device));
+	}
+
+	for(const auto& device : deviceFamily) {
+		if(deviceWeight.rbegin( )->first > 0) {
+			physicalDevice = device;
+			break;
+		}
+	}
+	if(physicalDevice == VK_NULL_HANDLE) {
+		throw std::runtime_error("Unable To Find A Suitable GPU\n");
+	}
+}
+
+/*
+	At the moment, this is only testing for a dedicated graphics card that supports geometry shaders, but this
+	function can be molded to perform whatever checks are needed for the application
+*/
+int BaseApplication::WeighDeviceSuitability(VkPhysicalDevice device)
+{
+	VkPhysicalDeviceProperties deviceProperties;
+	vkGetPhysicalDeviceProperties(device, &deviceProperties);
+	VkPhysicalDeviceFeatures deviceFeatures;
+	vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
+
+	int weightFactor {0};
+	if(deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
+		weightFactor += 5000;
+	}
+	weightFactor += deviceProperties.limits.maxImageDimension2D;
+	if(!deviceFeatures.geometryShader) {
+		return 0;
+	}
+
+	return weightFactor;
 }
