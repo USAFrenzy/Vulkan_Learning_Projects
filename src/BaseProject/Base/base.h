@@ -8,6 +8,10 @@
 // below macro is just for internal toggles -> 0 Being "OFF"
 #define INTERNAL_DEBUG             1
 #define PRINT_INTERNAL_DB_MESSAGES 1
+
+// Just A  Couple Of Versioning Macros
+#define VERSION_STRING_FORMAT(major, minor, revision) #major "." #minor "." #revision
+#define VERSION_NUMBER(maj, min, rev)        VERSION_STRING_FORMAT(maj, min, rev )
 #define VULKAN_API_USED            VK_API_VERSION_1_2
 #define GLFW_API_USED              340
 
@@ -42,8 +46,8 @@ class BaseApplication
 	void const PrintAvailableVulkanExtensions(std::vector<VkExtensionProperties> supportedExtensionsList);
 	void const PrintValidationLayerCheck( );
 	void const PrintRequiredGLFWExtensions( );
-	std::string const GetVulkanVersionStr( );
-	std::string const GetGLFWVersionStr( );
+	void PrintVulkanVersion( );
+	void PrintGLFWVersion( );
 
       private:
 	const int windowWidth   = 480;

@@ -59,8 +59,11 @@ void BaseApplication::CreateInstance( )
 {
 #if INTERNAL_DEBUG
 	#if PRINT_INTERNAL_DB_MESSAGES
-	std::cout << "Vulkan Version: " << GetVulkanVersionStr( ) << "\n";
-	std::cout << "GLFW Version: " << GetGLFWVersionStr( ) << "\n";
+	;
+	PrintVulkanVersion();
+	// std::cout << "Vulkan Version: " << temp << "\n";
+	PrintGLFWVersion();
+	// std::cout << "GLFW Version: " << temp << "\n";
 	#endif
 	PrintAvailableVulkanExtensions(QueryAvailableVulkanExtensions( ));
 	if(enableValidationLayers && !CheckValidationLayerSupport( )) {
@@ -185,24 +188,28 @@ void const BaseApplication::PrintRequiredGLFWExtensions( )
 	}
 }
 
-std::string const BaseApplication::GetVulkanVersionStr( )
+void BaseApplication::PrintVulkanVersion( )
 {
 	uint32_t instanceVersion = VULKAN_API_USED;
-	std::string major, minor, patch;
 	auto FN_vkEnumerateInstanceVersion =
 	  PFN_vkEnumerateInstanceVersion(vkGetInstanceProcAddr(nullptr, "vkEnumerateInstanceVersion"));
-	vkEnumerateInstanceVersion(&instanceVersion);
-	major = std::to_string(VK_API_VERSION_MAJOR(instanceVersion));
-	minor = std::to_string(VK_API_VERSION_MINOR(instanceVersion));
-	patch = std::to_string(VK_API_VERSION_PATCH(instanceVersion));
-	return (major + "." + minor + "." + patch);
+	if(vkEnumerateInstanceVersion) {
+		vkEnumerateInstanceVersion(&instanceVersion);
+	}
+
+	// 3 macros to extract version info
+	uint32_t major = VK_VERSION_MAJOR(instanceVersion);
+	uint32_t minor = VK_VERSION_MINOR(instanceVersion);
+	uint32_t patch = VK_VERSION_PATCH(instanceVersion);
+
+	printf("Vulkan Version: %i.%i.%i\n",major, minor, patch);
 }
 
-std::string const BaseApplication::GetGLFWVersionStr( )
+
+
+void BaseApplication::PrintGLFWVersion( )
 {
-	return (std::to_string(GLFW_VERSION_MAJOR) + "." + std::to_string(GLFW_VERSION_MINOR) + "." +
-		std::to_string(GLFW_VERSION_REVISION))
-	  .c_str( );
+	printf("GLFW Version: %i.%i.%i\n", GLFW_VERSION_MAJOR, GLFW_VERSION_MINOR, GLFW_VERSION_REVISION);
 }
 
 // disabling the unscoped enum warning as it's not this code base causing it but Vulkan
