@@ -25,13 +25,13 @@ void BaseApplication::Run( )
 
 void BaseApplication::ApplicationLoop( )
 {
-	dbPrint("This Is From The Application Loop Function\n");
+	dbPrint("\nThis Is From The Application Loop Function\n");
 	dbPrint("Polling Window Events\n");
 	// NOTE: Temporary Code To Allow Window Closing Until Custom Event Handler Is Implemented
 	while(!windowContext.Close( )) {
 		glfwPollEvents( );
 	}
-	dbPrint("Window Closing\n");
+	dbPrint("\nWindow Closing\n");
 }
 
 void BaseApplication::VulkanInit( )
@@ -40,29 +40,33 @@ void BaseApplication::VulkanInit( )
 	CreateInstance( );
 	DebugMessengerInit( );
 	QueryPhysicalDevices( );
-	dbPrint("Vulkan Instance Created\n");
+	CreateLogicalDevice( );
+	dbPrint("\nVulkan Instance Created\n");
 }
 
 void BaseApplication::VulkanFree( )
 {
-	dbPrint("This Is From The Vulkan Free Function\n");
+	dbPrint("\nThis Is From The Vulkan Free Function:\n");
+	vkDestroyDevice(logicalDevice, nullptr);
+	dbPrint("Logical Device Destroyed\n");
 	if(enableValidationLayers) {
 		// Third Parameter would be the custom allocator callback
 		DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
+		dbPrint("Debug Messenger Destroyed\n");
 	}
 	// Second Parameter would be the custom allocator callback
 	vkDestroyInstance(instance, nullptr);
-	dbPrint("Vulkan Instance Destroyed\n");
+	dbPrint("Vulkan Instance Destroyed\n\n");
 }
 
 void BaseApplication::CreateInstance( )
 {
 #if INTERNAL_DEBUG
 	#if PRINT_INTERNAL_DB_MESSAGES
-	;
-	PrintVulkanVersion();
+	dbPrint("\n");
+	PrintVulkanVersion( );
 	// std::cout << "Vulkan Version: " << temp << "\n";
-	PrintGLFWVersion();
+	PrintGLFWVersion( );
 	// std::cout << "GLFW Version: " << temp << "\n";
 	#endif
 	PrintAvailableVulkanExtensions(QueryAvailableVulkanExtensions( ));
@@ -70,6 +74,7 @@ void BaseApplication::CreateInstance( )
 		throw std::runtime_error("ERROR: Validation Layers Were Requested But Are Not Available\n");
 	}
 	PrintValidationLayerCheck( );
+	dbPrint("\n");
 #endif
 	// Populating The App info and instance info structs (first struct is technically optional, second is
 	// required)
@@ -202,9 +207,8 @@ void BaseApplication::PrintVulkanVersion( )
 	uint32_t minor = VK_VERSION_MINOR(instanceVersion);
 	uint32_t patch = VK_VERSION_PATCH(instanceVersion);
 
-	printf("Vulkan Version: %i.%i.%i\n",major, minor, patch);
+	printf("Vulkan Version: %i.%i.%i\n", major, minor, patch);
 }
-
 
 
 void BaseApplication::PrintGLFWVersion( )
@@ -286,9 +290,16 @@ void BaseApplication::QueryPhysicalDevices( )
 	for(const auto& device : deviceFamily) {
 		if(deviceWeight.rbegin( )->first > 0) {
 			physicalDevice = device;
+#if PRINT_INTERNAL_DB_MESSAGES
+			VkPhysicalDeviceProperties deviceProperties;
+			vkGetPhysicalDeviceProperties(device, &deviceProperties);
+			dbPrint("\nDevice Selected For Operations Based On Suitability Checks: %s\n",
+				deviceProperties.deviceName);
+#endif
 			break;
 		}
 	}
+	dbPrint("\n"); // Carry On "Pretty" Printing Layout From WeighDeviceSuitability()
 	if(physicalDevice == VK_NULL_HANDLE) {
 		throw std::runtime_error("Unable To Find A Suitable GPU\n");
 	}
@@ -305,14 +316,88 @@ int BaseApplication::WeighDeviceSuitability(VkPhysicalDevice device)
 	VkPhysicalDeviceFeatures deviceFeatures;
 	vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
 
+	dbPrint("\n"); // Simply to make the following text stand out
 	int weightFactor {0};
 	if(deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
 		weightFactor += 5000;
+		dbPrint("A Dedicated Graphics Card Was Found: %s\n", deviceProperties.deviceName);
+	} else if(deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU) {
+		weightFactor += 1000;
+		dbPrint("An Integrated Device Type Was Found: %s\n", deviceProperties.deviceName);
 	}
 	weightFactor += deviceProperties.limits.maxImageDimension2D;
 	if(!deviceFeatures.geometryShader) {
+		dbPrint("Graphics Card Found Does Not Support Geometry Shaders. Weight Factor Equals '0'\n");
 		return 0;
 	}
+	QueueFamilyIndices indices = QueryForQueueFamilies(device);
+	if(indices.isComplete( )) {
+		dbPrint("Total Weight Factor Given To Graphics Device %s: %i\n",
+			deviceProperties.deviceName,
+			weightFactor);
+		dbPrint("Graphics Family Indices For %s Have Values And Support Queue Families Requested\n",
+			deviceProperties.deviceName);
+		return weightFactor;
+	} else {
+		return 0;
+	}
+}
+/*
+	Retrieves The List Of Queue Families And The Type Of Operations That They Support
+	Specifically Loops Through The Families To Find One That Supports "VK_QUEUE_GRAPHICS_BIT"
+*/
 
-	return weightFactor;
+QueueFamilyIndices BaseApplication::QueryForQueueFamilies(VkPhysicalDevice device)
+{
+	QueueFamilyIndices indices;
+	uint32_t queueFamilyCount(0);
+	vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
+	std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
+	vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data( ));
+
+	int i(0);
+	for(const auto& queueFamily : queueFamilies) {
+		if(queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
+			indices.graphicsFamily = i;
+		}
+		if(indices.isComplete( )) {
+			break;
+		}
+		i++;
+	}
+	return indices;
+}
+
+void BaseApplication::CreateLogicalDevice( )
+{
+	float queuePriority                     = 1.0f;
+	QueueFamilyIndices indices              = QueryForQueueFamilies(physicalDevice);
+	VkDeviceQueueCreateInfo queueCreateInfo = { };
+	queueCreateInfo.sType                   = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+	queueCreateInfo.queueFamilyIndex        = indices.graphicsFamily.value( );
+	queueCreateInfo.queueCount              = 1;
+	queueCreateInfo.pQueuePriorities        = &queuePriority;
+
+	VkPhysicalDeviceFeatures deviceFeatures { };
+
+	VkDeviceCreateInfo deviceCreateInfo   = { };
+	deviceCreateInfo.sType                = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+	deviceCreateInfo.pQueueCreateInfos    = &queueCreateInfo;
+	deviceCreateInfo.queueCreateInfoCount = 1;
+	deviceCreateInfo.pEnabledFeatures     = &deviceFeatures;
+	// Next Few Lines are uneccessary due to device layers being depracated but still good practice to
+	// explicitly set them
+	deviceCreateInfo.enabledExtensionCount = 0;
+	if(enableValidationLayers) {
+		deviceCreateInfo.enabledLayerCount   = static_cast<uint32_t>(validationLayers.size( ));
+		deviceCreateInfo.ppEnabledLayerNames = validationLayers.data( );
+	} else {
+		deviceCreateInfo.enabledLayerCount = 0;
+	}
+	if(vkCreateDevice(physicalDevice, &deviceCreateInfo, nullptr, &logicalDevice) != VK_SUCCESS) {
+		throw std::runtime_error("ERROR: Failed To Create Logical Device\n");
+	}
+	dbPrint("\nLogical Device Successfully Created\n");
+	vkGetDeviceQueue(logicalDevice, indices.graphicsFamily.value( ), 0, &graphicsQueue);
+	dbPrint("Logical Device Retrieving Device Queue\n");
 }

@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "Window/window.h"
+#include <optional>
 
 // below macro is just for internal toggles -> 0 Being "OFF"
 #define INTERNAL_DEBUG             1
@@ -11,15 +12,24 @@
 
 // Just A  Couple Of Versioning Macros
 #define VERSION_STRING_FORMAT(major, minor, revision) #major "." #minor "." #revision
-#define VERSION_NUMBER(maj, min, rev)        VERSION_STRING_FORMAT(maj, min, rev )
-#define VULKAN_API_USED            VK_API_VERSION_1_2
-#define GLFW_API_USED              340
+#define VERSION_NUMBER(maj, min, rev)                 VERSION_STRING_FORMAT(maj, min, rev)
+#define VULKAN_API_USED                               VK_API_VERSION_1_2
+#define GLFW_API_USED                                 340
 
 #if INTERNAL_DEBUG
 const bool enableValidationLayers = true;
 #else
 const bool enableValidationLayers = false;
 #endif
+
+struct QueueFamilyIndices
+{
+	std::optional<uint32_t> graphicsFamily;
+	bool isComplete( )
+	{
+		return graphicsFamily.has_value( );
+	}
+};
 
 class BaseApplication
 {
@@ -41,6 +51,9 @@ class BaseApplication
 						  const VkAllocationCallbacks* pAllocator);
 	void QueryPhysicalDevices( );
 	int WeighDeviceSuitability(VkPhysicalDevice device);
+	QueueFamilyIndices QueryForQueueFamilies(VkPhysicalDevice device);
+	void CreateLogicalDevice( );
+
 
 	// Temporary/Basic Debugging Functions
 	void const PrintAvailableVulkanExtensions(std::vector<VkExtensionProperties> supportedExtensionsList);
@@ -57,6 +70,8 @@ class BaseApplication
 	std::vector<const char*> validationLayers;
 	VkDebugUtilsMessengerEXT debugMessenger = VK_NULL_HANDLE;
 	VkPhysicalDevice physicalDevice         = VK_NULL_HANDLE;
+	VkDevice logicalDevice                  = VK_NULL_HANDLE;
+	VkQueue graphicsQueue                   = VK_NULL_HANDLE;
 
       private:
 	void ApplicationLoop( );
@@ -86,6 +101,7 @@ static VkResult CreateDebugUtilsMessengerEXT(VkInstance instance,
 	}
 }
 #pragma warning(pop)
+
 
 #if PRINT_INTERNAL_DB_MESSAGES
 /*
