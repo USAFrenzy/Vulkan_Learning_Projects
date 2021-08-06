@@ -32,8 +32,15 @@ The Code Base Or See What Has So Far Been Created/Implemented, Then Read On Belo
 
 
 ## Current Progress ##
-Validation Layer Support 
-![](https://github.com/USAFrenzy/Vulkan_Learning_Projects/blob/main/Resources/Vulkan_Project_Progress_02.gif)
 
 Basic Window Creation And Cursor/Window Movement Logging
-![](https://github.com/USAFrenzy/Vulkan_Learning_Projects/blob/main/Resources/Vulkan_Project_Progress_01.gif)
+![](https://github.com/USAFrenzy/Vulkan_Learning_Projects/blob/main/Resources/ProgressPhotos/Vulkan_Project_Progress_01.gif)
+
+Validation Layer Support 
+![](https://github.com/USAFrenzy/Vulkan_Learning_Projects/blob/main/Resources/ProgressPhotos/Vulkan_Project_Progress_02.gif)
+
+Device Creation And Logical Device Creation
+![](https://github.com/USAFrenzy/Vulkan_Learning_Projects/blob/main/Resources/ProgressPhotos/Vulkan_Project_Progress_03.gif)
+
+
+
