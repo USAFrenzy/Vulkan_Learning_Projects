@@ -201,12 +201,9 @@ void BaseApplication::PrintVulkanVersion( )
 	if(vkEnumerateInstanceVersion) {
 		vkEnumerateInstanceVersion(&instanceVersion);
 	}
-
-	// 3 macros to extract version info
 	uint32_t major = VK_VERSION_MAJOR(instanceVersion);
 	uint32_t minor = VK_VERSION_MINOR(instanceVersion);
 	uint32_t patch = VK_VERSION_PATCH(instanceVersion);
-
 	printf("Vulkan Version: %i.%i.%i\n", major, minor, patch);
 }
 
