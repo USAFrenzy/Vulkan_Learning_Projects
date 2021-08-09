@@ -58,12 +58,8 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 #             Compile and link options              #
 #####################################################
 if(MSVC)
-    target_compile_options(${PROJECT_NAME} PRIVATE
-        $<$<CONFIG:Distribution>:
-            /Oi;
-            /GF;
-            /Gy
-        >
+    target_compile_options(${PROJECT_NAME} 
+	PRIVATE
         $<$<CONFIG:Release>:
             /Oi;
             /Gy
@@ -75,15 +71,16 @@ if(MSVC)
         ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT};
         ${DEFAULT_CXX_EXCEPTION_HANDLING}
     )
-    target_link_options(${PROJECT_NAME} PRIVATE
-        $<$<CONFIG:Distribution>:
-            /OPT:REF;
-            /OPT:ICF
+    target_link_options(${PROJECT_NAME} 
+	PRIVATE
+        $<$<CONFIG:Debug>:
+            /INCREMENTAL
         >
         $<$<CONFIG:Release>:
             /OPT:REF;
             /OPT:ICF
         >
+	/DEBUG;
         /SUBSYSTEM:CONSOLE
     )
 endif()
