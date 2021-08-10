@@ -20,14 +20,14 @@ target_link_libraries(${PROJECT_NAME} glfw ${GLFW_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} Vulkan::Vulkan)
 
 # ##################################################################################################
-# Target name For Configuration Builds       #
+# Target name For Configuration Builds
 # ##################################################################################################
 set_target_properties(
   ${PROJECT_NAME} PROPERTIES TARGET_NAME_DEBUG "BaseProject_Debug" TARGET_NAME_RELEASE
                                                                    "BaseProject_Release"
 )
 # ##################################################################################################
-# Compile definitions                  #
+# Compile definitions
 # ##################################################################################################
 target_compile_definitions(
   ${PROJECT_NAME}
@@ -42,7 +42,7 @@ target_compile_definitions(
 )
 
 # ##################################################################################################
-# Compile and link options              #
+# Compile and link options
 # ##################################################################################################
 if(MSVC)
   target_compile_options(

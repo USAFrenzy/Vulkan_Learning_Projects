@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 # ##################################################################################################
-# Meta Data such as name and revision #
+# Meta Data such as name and revision
 # ##################################################################################################
 include(cmakeSettings/MetaData.cmake)
 project(${META_PROJECT_NAME} LANGUAGES CXX)
@@ -10,12 +10,12 @@ project(${META_PROJECT_NAME} LANGUAGES CXX)
 include_directories(src)
 
 # ##################################################################################################
-# This Section Is For Linking To Vulkan     #
+# This Section Is For Linking To Vulkan
 # ##################################################################################################
 find_package(Vulkan REQUIRED)
 
 # ##################################################################################################
-# This Section Is For Linking To GLFW Later On #
+# This Section Is For Linking To GLFW Later On
 # ##################################################################################################
 set(GLFW_BUILD_DOCS
     OFF
@@ -32,7 +32,7 @@ set(GLFW_BUILD_EXAMPLES
 add_subdirectory(vendor/GLFW)
 
 # ##################################################################################################
-# Where To Look For The Vulkan Libraries For Linking       #
+# Where To Look For The Vulkan Libraries For Linking
 # ##################################################################################################
 link_directories(${Vulkan_INCLUDE_DIRS}; ${Vulkan_LIBRARY}; ${GLFW_LIBRARIES})
 
@@ -42,7 +42,7 @@ include(cmakeSettings/PreventInSrcBuilds.cmake)
 assureoutofsourcebuilds()
 
 # ##################################################################################################
-# Project Options                                          #
+# Project Options
 # ##################################################################################################
 option(ENABLE_TESTING "Enable Test Builds" OFF)
 
@@ -52,24 +52,24 @@ option(ENABLE_TESTING "Enable Test Builds" OFF)
 include(CTest)
 
 # ##################################################################################################
-# Use solution folders feature              #
+# Use solution folders feature
 # ##################################################################################################
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # ##################################################################################################
-# Setting Output Directories                    #
+# Setting Output Directories
 # ##################################################################################################
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
 
 # ##################################################################################################
-# Write The Version File Out                     #
+# Write The Version File Out
 # ##################################################################################################
 file(WRITE "${PROJECT_BINARY_DIR}/VERSION" "${META_NAME_VERSION}")
 
 # ##################################################################################################
-# Global configuration types   #
+# Global configuration types
 # ##################################################################################################
 set(CMAKE_CONFIGURATION_TYPES
     "Debug" "Release"
@@ -77,7 +77,7 @@ set(CMAKE_CONFIGURATION_TYPES
 )
 
 # ##################################################################################################
-# If Tests Are Enabled, Build Them #
+# If Tests Are Enabled, Build Them
 # ##################################################################################################
 if(ENABLE_TESTING)
   enable_testing()
@@ -86,7 +86,7 @@ if(ENABLE_TESTING)
 endif()
 
 # ##################################################################################################
-# The Different Projects To Build #
+# The Different Projects To Build
 # ##################################################################################################
 add_subdirectory(src)
 
